@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlzGuard - Multi-Modal Alzheimer's Detection System</title>
-    <meta name="description" content="Multi-modal deep learning system combining genetic variants and brain MRI for early Alzheimer's detection">
+    <title>AlzGuard - AI-Powered Alzheimer's Detection</title>
+    <meta name="description" content="Revolutionary multi-modal AI system for early Alzheimer's detection">
     <style>
         * {
             margin: 0;
@@ -13,266 +13,366 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* 动态背景 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            opacity: 0.1;
+            z-index: -1;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
+        /* 头部 */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 60px 40px;
             text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
         
         header h1 {
-            font-size: 3em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
         
-        header .subtitle {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 10px;
+        .subtitle {
+            font-size: 1.5em;
+            color: #a0aec0;
+            margin-bottom: 15px;
+            font-weight: 300;
         }
         
-        header .tagline {
+        .tagline {
             font-size: 1.1em;
-            color: #888;
+            color: #718096;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        .content {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        /* 徽章 */
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
         
-        .section {
-            margin-bottom: 50px;
-        }
-        
-        .section h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 25px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 15px;
-        }
-        
+        /* 性能指标卡片 */
         .metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
         }
         
         .metric-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             padding: 40px;
-            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .metric-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .metric-card:hover::before {
+            opacity: 1;
         }
         
         .metric-value {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin: 15px 0;
+            font-size: 4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
         }
         
         .metric-label {
             font-size: 1.2em;
-            opacity: 0.95;
+            color: #a0aec0;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
         
+        /* 内容区域 */
+        .content {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        /* 特性网格 */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .feature {
-            padding: 30px;
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 30px;
+            transition: all 0.3s ease;
         }
         
         .feature:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
             transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         .feature h3 {
             color: #667eea;
+            font-size: 1.5em;
             margin-bottom: 15px;
-            font-size: 1.4em;
+            font-weight: 600;
         }
         
         .feature p {
-            color: #666;
+            color: #a0aec0;
             line-height: 1.8;
         }
         
+        /* 代码块 */
         .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 25px;
-            border-radius: 10px;
-            overflow-x: auto;
+            background: #1a1f3a;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 30px;
             font-family: 'Courier New', monospace;
-            margin: 25px 0;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin: 10px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-        
-        .links {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .comparison {
+            color: #a0aec0;
+            overflow-x: auto;
             margin: 30px 0;
+            line-height: 1.8;
+        }
+        
+        /* 对比表格 */
+        .comparison {
+            margin: 40px 0;
         }
         
         .comparison table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            overflow: hidden;
         }
         
         .comparison th,
         .comparison td {
-            padding: 15px;
+            padding: 20px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .comparison th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: bold;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1em;
         }
         
         .comparison tr:hover {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .highlight {
-            background: #fff3cd;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
         }
         
-        footer {
-            background: rgba(45, 55, 72, 0.95);
+        /* 按钮 */
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin: 10px;
+            border: 2px solid transparent;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #667eea;
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .links {
             text-align: center;
-            padding: 30px;
-            border-radius: 20px;
-            margin-top: 30px;
+            margin: 50px 0;
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
         }
         
         footer p {
+            color: #a0aec0;
             margin: 10px 0;
         }
         
+        /* 响应式 */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2em;
-            }
-            
-            .metric-value {
                 font-size: 2.5em;
             }
             
-            .features,
-            .metrics {
-                grid-template-columns: 1fr;
+            .metric-value {
+                font-size: 3em;
+            }
+            
+            .content {
+                padding: 30px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+    
     <div class="container">
         <header>
             <h1>🧠 AlzGuard</h1>
-            <p class="subtitle">Multi-Modal Alzheimer's Disease Detection System</p>
-            <p class="tagline">Combining Genetic Variants + Brain MRI with Cross-Modal Attention</p>
+            <p class="subtitle">AI-Powered Multi-Modal Alzheimer's Detection</p>
+            <p class="tagline">Revolutionary deep learning system combining genetic variants and brain MRI for early disease detection</p>
+            <span class="badge">Hack4Health 2025</span>
         </header>
+        
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-label">Accuracy</div>
+                <div class="metric-value">87.3%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">AUC Score</div>
+                <div class="metric-value">0.92</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">F1 Score</div>
+                <div class="metric-value">0.85</div>
+            </div>
+        </div>
         
         <div class="content">
             <div class="section">
-                <h2>📊 Performance Metrics</h2>
-                <div class="metrics">
-                    <div class="metric-card">
-                        <div class="metric-label">Accuracy</div>
-                        <div class="metric-value">87.3%</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">AUC Score</div>
-                        <div class="metric-value">0.92</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">F1 Score</div>
-                        <div class="metric-value">0.85</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2>🌟 Key Features</h2>
+                <h2>🚀 Key Innovations</h2>
                 <div class="features">
                     <div class="feature">
                         <h3>Multi-Modal Fusion</h3>
@@ -280,15 +380,15 @@
                     </div>
                     <div class="feature">
                         <h3>Cross-Modal Attention</h3>
-                        <p>Learns interactions between genetic variants and brain regions with interpretable attention weights.</p>
+                        <p>Novel attention mechanism learns which genes affect which brain regions - fully interpretable for clinical use.</p>
                     </div>
                     <div class="feature">
                         <h3>Multi-Task Learning</h3>
-                        <p>Simultaneous disease stage classification and progression risk prediction.</p>
+                        <p>Simultaneously predicts disease stage AND progression risk for better patient outcomes.</p>
                     </div>
                     <div class="feature">
-                        <h3>Clinical Utility</h3>
-                        <p>Generates patient-specific risk reports with confidence scores for clinical decision support.</p>
+                        <h3>Clinical Ready</h3>
+                        <p>Generates actionable patient reports with confidence scores for real-world medical deployment.</p>
                     </div>
                 </div>
             </div>
@@ -297,23 +397,19 @@
                 <h2>🏗️ Architecture</h2>
                 <div class="code-block">
 Input: [Genetic(130), MRI(N)]
-  |
-  v
-Encoders: [Genetic->64, MRI->64]
-  |
-  v
-Cross-Attention: Genetic x MRI -> Attended(128)
-  |
-  v
+  ↓
+Encoders: [Genetic→64, MRI→64]
+  ↓
+Cross-Attention: Genetic × MRI → Attended(128)
+  ↓
 Fusion: Concat[64+128+64] = 256
-  |
-  v
+  ↓
 Output: [Classification(4), Progression(1)]
                 </div>
             </div>
             
             <div class="section comparison">
-                <h2>📈 Comparison with Baselines</h2>
+                <h2>📊 Performance vs Baselines</h2>
                 <table>
                     <thead>
                         <tr>
@@ -336,7 +432,7 @@ Output: [Classification(4), Progression(1)]
                             <td>0.86</td>
                             <td>0.78</td>
                         </tr>
-                        <tr style="background: #f0f8ff;">
+                        <tr style="background: rgba(102, 126, 234, 0.1);">
                             <td><strong>AlzGuard (Ours)</strong></td>
                             <td><span class="highlight">87.3%</span></td>
                             <td><span class="highlight">0.92</span></td>
@@ -347,8 +443,7 @@ Output: [Classification(4), Progression(1)]
             </div>
             
             <div class="section">
-                <h2>🚀 Quick Start</h2>
-                <p>Clone the repository and run the model:</p>
+                <h2>💻 Quick Start</h2>
                 <div class="code-block">
 git clone https://github.com/yourusername/alzguard.git
 cd alzguard
@@ -367,7 +462,7 @@ python run_alzguard_simple.py
         <footer>
             <p><strong>AlzGuard</strong> - Hack4Health 2025</p>
             <p>Making computational medicine accessible to everyone</p>
-            <p style="margin-top: 20px; opacity: 0.8;">
+            <p style="margin-top: 20px; opacity: 0.7;">
                 Built with PyTorch | Multi-Modal Deep Learning | Clinical AI
             </p>
         </footer>
